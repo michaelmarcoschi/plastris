@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Plastris - Plastic Sprint</title>
+	<link rel="stylesheet" href="../style.css">
+	<link rel="icon" type="image/x-icon" href="../assets/favicon.png">
+</head>
+<!--Start of Body-->
+<body>
+
+	<script src="../checkLocalStorage.js"></script>
+	
+	<div class="menu-wrapper">
+		
+		<div class="menu-container" style="width: 70%;">
+			<div>
+				<h1 class="title" style="margin: auto; width: 100%; text-align: center; padding-top: 3vh;">Plastic Sprint</h1>
+				<p style="font-size: 30px; text-align: center;">Try to clear the plastic blocks as fast as possible!</p>
+			</div>
+
+			<div style="display: flex;">
+				<button class="button select-button" onclick="selectButton(0)" style="width: 14vw; margin-left: 0;">40<br>Lines</button>
+				<button class="button select-button" onclick="selectButton(1)" style="width: 14vw;">20<br>Lines</button>
+				<button class="button select-button" onclick="selectButton(2)" style="width: 14vw; margin-right: 0;">100<br>Lines</button>
+			</div>	
+		</div>
+
+		<div>
+			<button class="button dark-grad" onclick="location.href='plastic-sprint/play.html'">Start game</button>
+			<button class="button dark-grad" onclick="location.href='../plastic-attack-menu.html'">Go back</button>
+		</div>
+
+	</div>
+
+	<script> 
+		const CURRENT_PAGE = "PL_SPR"
+	</script>
+	<script src="buttonSelect.js"></script>
+
+</body>
+<!--End of Body-->
+</html>
