@@ -80,7 +80,9 @@ const defaultRecords = [
 ]
 
 // Set up local storage if the user doesn't already have it set
-if (localStorage.length == 0){
+if (localStorage.getItem("Records") == null){
+
 	localStorage.setItem("Settings", JSON.stringify(defaultSettings))
 	localStorage.setItem("Records", JSON.stringify(defaultRecords))
+	
 }

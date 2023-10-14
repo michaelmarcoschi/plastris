@@ -9,7 +9,9 @@ const defaultButtonSelections = {
 
 // Set up session storage if the user doesn't already have it set
 if (sessionStorage.length == 0){
+
 	sessionStorage.setItem("Selections", JSON.stringify(defaultButtonSelections))
+	
 }
 
 buttonSelections = JSON.parse(sessionStorage.getItem("Selections"))

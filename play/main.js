@@ -16,10 +16,14 @@ INDICATOR_IMAGE.src = "../../assets/background" + JSON.parse(localStorage.getIte
 const BACKGROUND_LOOKUP = [
 	// Default
 	{size: "100%", opacity: "0.0"},
-	// Background 2
+	// Night Sky
 	{size: "cover", opacity: "0.5"},
-	// Background 3
-	{size: "cover", opacity: "0.5"}
+	// Cosmos
+	{size: "cover", opacity: "0.5"},
+	// Gradient
+	{size: "cover", opacity: "0.0"},
+	// Light Beams
+	{size: "cover", opacity: "0.75"}
 ]
 
 // Canvas variables
