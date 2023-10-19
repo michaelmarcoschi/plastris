@@ -1,240 +1,237 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Plastris - Records</title>
-	<link rel="stylesheet" href="../style.css">
-	<link rel="icon" type="image/x-icon" href="../assets/favicon.png">
+  <title>Plastris - Records</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.png">
 </head>
 <!--Start of Body-->
 <body>
 
-	<script src="../checkLocalStorage.js"></script>
+  <script src="../checkLocalStorage.js"></script>
 
-	<!--Start of records-->
-	<div class="records-wrapper">
+  <!--Start of records-->
+  <div class="records-wrapper">
 
-		<!--Start of fixed container-->
-		<div class="fixed-container">
-			<button type="button" class="button" onclick="location.href='../'" style="font-size: 35px; width: 100%;">Go back</button>
-		</div>
-		<!--End of fixed container-->
+    <!--Start of fixed container-->
+    <div class="fixed-container">
+      <button type="button" class="button" onclick="location.href='../'" style="font-size: 35px; width: 100%;">Go back</button>
+    </div>
+    <!--End of fixed container-->
 
-		<!--Start of Overall Stats-->
-		<div class="container" style="margin-bottom: 20px;">
-			<h1 class="title">Total Stats</h1>
-			<div class="container">
-				<div class="float-child">Total rotations</div>
-				<div class="float-child"><span id="OVR_TOTAL_ROTATIONS"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Total piece locks</div>
-				<div class="float-child"><span id="OVR_TOTAL_LOCKS"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Total score gathered</div>
-				<div class="float-child"><span id="OVR_TOTAL_SCORE"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Total games played</div>
-				<div class="float-child"><span id="OVR_TOTAL_GAMES"></span></div>
-			</div>
-		</div>
-		<!--End of Overall Stats-->
+    <!--Start of Overall Stats-->
+    <div class="container" style="margin-bottom: 20px;">
+      <h1 class="title">Total Stats</h1>
+      <div class="container">
+        <div class="float-child">Total rotations</div>
+        <div class="float-child"><span id="OVR_TOTAL_ROTATIONS"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Total piece locks</div>
+        <div class="float-child"><span id="OVR_TOTAL_LOCKS"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Total score gathered</div>
+        <div class="float-child"><span id="OVR_TOTAL_SCORE"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Total games played</div>
+        <div class="float-child"><span id="OVR_TOTAL_GAMES"></span></div>
+      </div>
+    </div>
+    <!--End of Overall Stats-->
 
-		<!--Start of Sprint-->
-		<div class="container" style="margin-bottom: 20px;">
-			<h1 class="title">Sprint</h1>
-			<div class="container">
-				<div class="float-child">Best time (40L)</div>
-				<div class="float-child"><span id="SPR_BEST_40L"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Best time (20L)</div>
-				<div class="float-child"><span id="SPR_BEST_20L"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Best time (100L)</div>
-				<div class="float-child"><span id="SPR_BEST_100L"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Games played</div>
-				<div class="float-child"><span id="SPR_TOTAL_GAMES"></span></div>
-			</div>
-		</div>
-		<!--End of Sprint-->
+    <!--Start of Sprint-->
+    <div class="container" style="margin-bottom: 20px;">
+      <h1 class="title">Sprint</h1>
+      <div class="container">
+        <div class="float-child">Best time (40L)</div>
+        <div class="float-child"><span id="SPR_BEST_40L"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Best time (20L)</div>
+        <div class="float-child"><span id="SPR_BEST_20L"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Best time (100L)</div>
+        <div class="float-child"><span id="SPR_BEST_100L"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Games played</div>
+        <div class="float-child"><span id="SPR_TOTAL_GAMES"></span></div>
+      </div>
+    </div>
+    <!--End of Sprint-->
 
-		<!--Start of Plastic Sprint-->
-		<div class="container" style="margin-bottom: 20px;">
-			<h1 class="title">Plastic Sprint</h1>
-			<div class="container">
-				<div class="float-child">Best time (40L)</div>
-				<div class="float-child"><span id="PL_SPR_BEST_40L"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Best time (20L)</div>
-				<div class="float-child"><span id="PL_SPR_BEST_20L"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Best time (100L)</div>
-				<div class="float-child"><span id="PL_SPR_BEST_100L"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Games played</div>
-				<div class="float-child"><span id="PL_SPR_TOTAL_GAMES"></span></div>
-			</div>
-		</div>
-		<!--End of Plastic Sprint-->
+    <!--Start of Plastic Sprint-->
+    <div class="container" style="margin-bottom: 20px;">
+      <h1 class="title">Plastic Sprint</h1>
+      <div class="container">
+        <div class="float-child">Best time (40L)</div>
+        <div class="float-child"><span id="PL_SPR_BEST_40L"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Best time (20L)</div>
+        <div class="float-child"><span id="PL_SPR_BEST_20L"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Best time (100L)</div>
+        <div class="float-child"><span id="PL_SPR_BEST_100L"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Games played</div>
+        <div class="float-child"><span id="PL_SPR_TOTAL_GAMES"></span></div>
+      </div>
+    </div>
+    <!--End of Plastic Sprint-->
 
-		<!--Start of Ultra-->
-		<div class="container" style="margin-bottom: 20px;">
-			<h1 class="title">Ultra</h1>
-			<div class="container">
-				<div class="float-child">Highest score (3 min)</div>
-				<div class="float-child"><span id="ULT_BEST_3MIN"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Highest score (2 min)</div>
-				<div class="float-child"><span id="ULT_BEST_2MIN"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Highest score (1 min)</div>
-				<div class="float-child"><span id="ULT_BEST_1MIN"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Games played</div>
-				<div class="float-child"><span id="ULT_TOTAL_GAMES"></span></div>
-			</div>
-		</div>
-		<!--End of Ultra-->
+    <!--Start of Ultra-->
+    <div class="container" style="margin-bottom: 20px;">
+      <h1 class="title">Ultra</h1>
+      <div class="container">
+        <div class="float-child">Highest score (3 min)</div>
+        <div class="float-child"><span id="ULT_BEST_3MIN"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Highest score (2 min)</div>
+        <div class="float-child"><span id="ULT_BEST_2MIN"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Highest score (1 min)</div>
+        <div class="float-child"><span id="ULT_BEST_1MIN"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Games played</div>
+        <div class="float-child"><span id="ULT_TOTAL_GAMES"></span></div>
+      </div>
+    </div>
+    <!--End of Ultra-->
 
-		<!--Start of Plastic Ultra-->
-		<div class="container" style="margin-bottom: 20px;">
-			<h1 class="title">Plastic Ultra</h1>
-			<div class="container">
-				<div class="float-child">Highest score (3 min)</div>
-				<div class="float-child"><span id="PL_ULT_BEST_3MIN"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Highest score (2 min)</div>
-				<div class="float-child"><span id="PL_ULT_BEST_2MIN"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Highest score (1 min)</div>
-				<div class="float-child"><span id="PL_ULT_BEST_1MIN"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Games played</div>
-				<div class="float-child"><span id="PL_ULT_TOTAL_GAMES"></span></div>
-			</div>
-		</div>
-		<!--End of Plastic Ultra-->
+    <!--Start of Plastic Ultra-->
+    <div class="container" style="margin-bottom: 20px;">
+      <h1 class="title">Plastic Ultra</h1>
+      <div class="container">
+        <div class="float-child">Highest score (3 min)</div>
+        <div class="float-child"><span id="PL_ULT_BEST_3MIN"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Highest score (2 min)</div>
+        <div class="float-child"><span id="PL_ULT_BEST_2MIN"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Highest score (1 min)</div>
+        <div class="float-child"><span id="PL_ULT_BEST_1MIN"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Games played</div>
+        <div class="float-child"><span id="PL_ULT_TOTAL_GAMES"></span></div>
+      </div>
+    </div>
+    <!--End of Plastic Ultra-->
 
-		<!--Start of Marathon-->
-		<div class="container" style="margin-bottom: 20px;">
-			<h1 class="title">Marathon</h1>
-			<div class="container">
-				<div class="float-child">Most lines cleared (classic)</div>
-				<div class="float-child"><span id="MAR_BEST_LINES_CLASSIC"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Highest score (classic)</div>
-				<div class="float-child"><span id="MAR_BEST_SCORE_CLASSIC"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Most lines cleared (freeplay)</div>
-				<div class="float-child"><span id="MAR_BEST_LINES_FREEPLAY"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Highest score (freeplay)</div>
-				<div class="float-child"><span id="MAR_BEST_SCORE_FREEPLAY"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Games played</div>
-				<div class="float-child"><span id="MAR_TOTAL_GAMES"></span></div>
-			</div>
-		</div>
-		<!--End of Marathon-->
+    <!--Start of Marathon-->
+    <div class="container" style="margin-bottom: 20px;">
+      <h1 class="title">Marathon</h1>
+      <div class="container">
+        <div class="float-child">Most lines cleared (classic)</div>
+        <div class="float-child"><span id="MAR_BEST_LINES_CLASSIC"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Highest score (classic)</div>
+        <div class="float-child"><span id="MAR_BEST_SCORE_CLASSIC"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Most lines cleared (freeplay)</div>
+        <div class="float-child"><span id="MAR_BEST_LINES_FREEPLAY"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Highest score (freeplay)</div>
+        <div class="float-child"><span id="MAR_BEST_SCORE_FREEPLAY"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Games played</div>
+        <div class="float-child"><span id="MAR_TOTAL_GAMES"></span></div>
+      </div>
+    </div>
+    <!--End of Marathon-->
 
-		<!--Start of Plastic Marathon-->
-		<div class="container" style="margin-bottom: 20px;">
-			<h1 class="title">Plastic Marathon</h1>
-			<div class="container">
-				<div class="float-child">Most lines cleared (classic)</div>
-				<div class="float-child"><span id="PL_MAR_BEST_LINES_CLASSIC"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Highest score (classic)</div>
-				<div class="float-child"><span id="PL_MAR_BEST_SCORE_CLASSIC"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Most lines cleared (freeplay)</div>
-				<div class="float-child"><span id="PL_MAR_BEST_LINES_FREEPLAY"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Highest score (freeplay)</div>
-				<div class="float-child"><span id="PL_MAR_BEST_SCORE_FREEPLAY"></span></div>
-			</div>
-			<div class="container">
-				<div class="float-child">Games played</div>
-				<div class="float-child"><span id="PL_MAR_TOTAL_GAMES"></span></div>
-			</div>
-		</div>
-		<!--End of Plastic Marathon	-->
+    <!--Start of Plastic Marathon-->
+    <div class="container" style="margin-bottom: 20px;">
+      <h1 class="title">Plastic Marathon</h1>
+      <div class="container">
+        <div class="float-child">Most lines cleared (classic)</div>
+        <div class="float-child"><span id="PL_MAR_BEST_LINES_CLASSIC"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Highest score (classic)</div>
+        <div class="float-child"><span id="PL_MAR_BEST_SCORE_CLASSIC"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Most lines cleared (freeplay)</div>
+        <div class="float-child"><span id="PL_MAR_BEST_LINES_FREEPLAY"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Highest score (freeplay)</div>
+        <div class="float-child"><span id="PL_MAR_BEST_SCORE_FREEPLAY"></span></div>
+      </div>
+      <div class="container">
+        <div class="float-child">Games played</div>
+        <div class="float-child"><span id="PL_MAR_TOTAL_GAMES"></span></div>
+      </div>
+    </div>
+    <!--End of Plastic Marathon	-->
 
-		<button type="button" class="reset-button" id="resetButton" onclick="resetButton()">Clear all records</button>
+    <button type="button" class="reset-button" id="resetButton" onclick="resetButton()">Clear all records</button>
 
-	</div>
-	<!--End of records-->
+  </div>
+  <!--End of records-->
 
-	<script>
+  <script>
+    // DISPLAYING RECORDS
+    records = JSON.parse(localStorage.getItem("Records"));
+    displays = [];
 
-		// DISPLAYING RECORDS
-		records = JSON.parse(localStorage.getItem("Records"))
-		displays = []
+    function convertTime(time) {
+      if (time == 1000000) {
+        return "N/A";
+      } else {
+        return (
+          String(Math.floor(time / 6000)) +
+          ":" +
+          (Math.floor(time * 0.01) % 60 < 10 ? "0" : "") +
+          (Math.floor(time * 0.01) % 60) +
+          "." +
+          String(String(0) + String(time)).slice(-2)
+        );
+      }
+    }
 
-		function convertTime(time){
+    for (array in records) {
+      displays.push([]);
 
-			if (time == 1000000){
-				return "N/A"
-			}
+      for (i in records[array]) {
+        displays[array].push(document.getElementById(records[array][i].label));
 
-			else {
-				return String(Math.floor(time / 6000)) + ":" + (((Math.floor(time * 0.01) % 60)) < 10 ? "0" : "") + ((Math.floor(time * 0.01) % 60)) + "." + (String(String(0) + String(time)).slice(-2))
-			}
-		}
+        if ((array == 1 || array == 2) && i != 3) {
+          displays[array][i].innerHTML = convertTime(records[array][i].value);
+        } else {
+          displays[array][i].innerHTML = records[array][i].value;
+        }
+      }
+    }
 
-		for (array in records){
-
-			displays.push([])
-
-			for (i in records[array]){
-
-				displays[array].push(document.getElementById(records[array][i].label))
-				
-				if ((array == 1 || array == 2) && i != 3){
-					displays[array][i].innerHTML = convertTime(records[array][i].value)
-				}
-
-				else {
-					displays[array][i].innerHTML = records[array][i].value
-				}
-				
-			}
-		}
-		
-		// RESET BUTTON
-		function resetButton(){
-			const resetDecision = confirm("Are you sure you want to clear all records? This can't be undone.")
-			if (resetDecision){
-
-				localStorage.setItem("Records", JSON.stringify(defaultRecords))
-				location.reload()
-
-			}
-		}
-		
-	</script>
-	
+    // RESET BUTTON
+    function resetButton() {
+      const resetDecision = confirm(
+        "Are you sure you want to clear all records? This can't be undone.",
+      );
+      if (resetDecision) {
+        localStorage.setItem("Records", JSON.stringify(defaultRecords));
+        location.reload();
+      }
+    }
+  </script>
+  
 </body>
 <!--End of Body-->
 </html>

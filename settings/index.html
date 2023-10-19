@@ -1,405 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Plastris - Settings</title>
-	<link rel="stylesheet" href="../style.css">
-	<link rel="icon" type="image/x-icon" href="../assets/favicon.png">
+  <title>Plastris - Settings</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.png">
 </head>
 <!--Start of Body-->
 <body>
 
-	<script src="../checkLocalStorage.js"></script>
-	
-	<!--Start of settings-->
-	<div class="settings-wrapper">
-
-		<!--Start of fixed container-->
-		<div class="fixed-container">
-			<button type="button" class="button" id="exitButton" onclick="exitButton()" style="font-size: 35px; width: 100%;">Go back</button>
-			<button type="button" class="button" id="resetButton" onclick="resetButton()" style="font-size: 35px; width: 100%;">Reset to defaults</button>
-		</div>
-		<!--End of fixed container-->
-
-		<!--Start of Sensitivity-->
-		<div class="container" style="margin-bottom: 20px;">
-			<h1 class="title">Sensitivity</h1>
-
-			<div class="container" style="margin-bottom: 20px;">
-				<text class="tooltip">DAS:<span class="tooltiptext">Delayed Auto-shift. The time it takes for repeats of an input to be triggered when the key is held down. Affects left and right movement.</span></text> <span id="DAS_OUTPUT"></span>ms
-				<br>
-				<input type="range" min="10" max="50" class="slider" id="DAS">
-			</div>
-
-			<div class="container" style="margin-bottom: 20px;">
-				<text class="tooltip">ARR:<span class="tooltiptext">Automatic Repeat Rate. The time inbetween repeats of an input when the key is held down. Affects left and right movement.</span></text> <span id="ARR_OUTPUT"></span>ms
-				<br>
-				<input type="range" min="-2" max="10" class="slider" id="ARR">
-			</div>
-
-			<div class="container" style="margin-bottom: 20px;">
-				<text class="tooltip">SD DAS:<span class="tooltiptext">Soft-drop DAS. The time it takes for repeats of an input to be triggered when the key is held down. Affects downwards movement.</span></text> <span id="SD_DAS_OUTPUT"></span>ms
-				<br>
-				<input type="range" min="0" max="50" class="slider" id="SD_DAS">
-			</div>
-
-			<div class="container">
-				<text class="tooltip">SDR:<span class="tooltiptext">Soft-drop Rate. The time inbetween repeats of an input when the key is held down. Affects downwards movement.</span></text> <span id="SDR_OUTPUT"></span>ms
-				<br>
-				<input type="range" min="-2" max="10" class="slider" id="SDR">
-			</div>
-
-		</div>
-		<!--End of sensitivity-->
-
-		<!--Start of Keybinds-->
-		<div class="container" style="margin-left: -1px; margin-bottom: 20px;">
-			<h1 class="title">Keybinds</h1>
-			<div class="container">
-				<div class="float-child">Rotate clockwise</div>
-				<div class="float-child"><span id="rotateCwDisplay"></span></div>
-				<button type="button" class="float-button" id="rotateCwButton" onclick="changeKeybind(0)">Change input</button>
-			</div>
-			<div class="container">
-				<div class="float-child">Rotate counter-clockwise</div>
-				<div class="float-child"><span id="rotateCcwDisplay"></span></div>
-				<button type="button" class="float-button" id="rotateCcwButton" onclick="changeKeybind(1)">Change input</button>
-			</div>
-			<div class="container">
-				<div class="float-child">Move right</div>
-				<div class="float-child"><span id="moveRightDisplay"></span></div>
-				<button type="button" class="float-button" id="moveRightButton" onclick="changeKeybind(2)">Change input</button>
-			</div>
-			<div class="container">
-				<div class="float-child">Move left</div>
-				<div class="float-child"><span id="moveLeftDisplay"></span></div>
-				<button type="button" class="float-button" id="moveLeftButton" onclick="changeKeybind(3)">Change input</button>
-			</div>
-			<div class="container">
-				<div class="float-child">Move down</div>
-				<div class="float-child"><span id="moveDownDisplay"></span></div>
-				<button type="button" class="float-button" id="moveDownButton" onclick="changeKeybind(4)">Change input</button>
-			</div>
-			<div class="container">
-				<div class="float-child">Hard drop</div>
-				<div class="float-child"><span id="hardDropDisplay"></span></div>
-				<button type="button" class="float-button" id="hardDropButton" onclick="changeKeybind(5)">Change input</button>
-			</div>
-			<div class="container">
-				<div class="float-child">Hold</div>
-				<div class="float-child"><span id="holdDisplay"></span></div>
-				<button type="button" class="float-button" id="holdButton" onclick="changeKeybind(6)">Change input</button>
-			</div>
-		</div>
-		<!--End of Keybinds-->
-
-		<!--Start of Cosmetics-->
-		<div class="container" style="margin-bottom: 20px;">
-			<h1 class="title">Cosmetics</h1>
-
-			<div class="container" style="margin-bottom: 20px;">
-				Select skin:
-				<br>
-				<select class="dropdown" id="skinDropdown">
-					<option value="1">Default</option>
-					<option value="2">Beveled</option>
-					<option value="3">Halftone</option>
-					<option value="4">Stripes</option>
-					<option value="5">Whiteout</option>
-				</select>
-
-				<br>
-				<canvas id="skinPreview"></canvas>
-				
-			</div>
-
-			<div class="container">
-				Select background:
-				<br>
-				<select class="dropdown" id="backgroundDropdown">
-					<option value="1">Default</option>
-					<option value="2">Night Sky</option>
-					<option value="3">Cosmos</option>
-					<option value="4">Gradient</option>
-					<option value="5">Light Beams</option>
-				</select>
-
-				<br>
-				<img id="bgPreview">
-
-			</div>
-		</div>
-		<!--End of Cosmetics-->
-	</div>
-	<!--End of settings-->
-
-	<script>
-
-		window.addEventListener("keydown",(event) => {
-			rotateCwButton.blur()
-			rotateCcwButton.blur()
-			moveRightButton.blur()
-			moveLeftButton.blur()
-			moveDownButton.blur()
-			hardDropButton.blur()
-			holdButton.blur()
-			actOnKeypress(event)
-		})
-
-		settings = JSON.parse(localStorage.getItem("Settings"))
-
-		// SENSITIVITY SETTINGS
-		let DAS_SLIDER = document.getElementById("DAS")
-		let DAS_OUTPUT = document.getElementById("DAS_OUTPUT")
-		DAS_SLIDER.value = JSON.parse(localStorage.getItem("Settings")).sensitivity.DAS
-		DAS_OUTPUT.innerHTML = (JSON.parse(localStorage.getItem("Settings")).sensitivity.DAS * 10)
-
-		let ARR_SLIDER = document.getElementById("ARR")
-		let ARR_OUTPUT = document.getElementById("ARR_OUTPUT")
-		ARR_SLIDER.value = convertRateToSetting(Number(JSON.parse(localStorage.getItem("Settings")).sensitivity.ARR), false)
-		ARR_OUTPUT.innerHTML = JSON.parse(localStorage.getItem("Settings")).sensitivity.ARR
-
-		let SD_DAS_SLIDER = document.getElementById("SD_DAS")
-		let SD_DAS_OUTPUT = document.getElementById("SD_DAS_OUTPUT")
-		SD_DAS_SLIDER.value = JSON.parse(localStorage.getItem("Settings")).sensitivity.SD_DAS
-		SD_DAS_OUTPUT.innerHTML = (JSON.parse(localStorage.getItem("Settings")).sensitivity.SD_DAS * 10)
-
-		let SDR_SLIDER = document.getElementById("SDR")
-		let SDR_OUTPUT = document.getElementById("SDR_OUTPUT")
-		SDR_SLIDER.value = convertRateToSetting(Number(JSON.parse(localStorage.getItem("Settings")).sensitivity.SDR), false)
-		SDR_OUTPUT.innerHTML = JSON.parse(localStorage.getItem("Settings")).sensitivity.SDR
-
-		DAS_SLIDER.oninput = function(){
-			settings.sensitivity.DAS = Number(this.value)
-			DAS_OUTPUT.innerHTML = Number(this.value) * 10
-		}
-		
-		ARR_SLIDER.oninput = function(){
-			settings.sensitivity.ARR = ARR_OUTPUT.innerHTML = (convertRateToSetting(Number(this.value), true))
-		}
-
-		SD_DAS_SLIDER.oninput = function(){
-			settings.sensitivity.SD_DAS = Number(this.value)
-			SD_DAS_OUTPUT.innerHTML = Number(this.value) * 10
-		}
-
-		SDR_SLIDER.oninput = function(){
-			settings.sensitivity.SDR = SDR_OUTPUT.innerHTML = (convertRateToSetting(Number(this.value), true))
-		}
-
-		// Function to convert slider values to setting values and vice versa
-		function convertRateToSetting(value, fromSlider){
-			if (fromSlider){
-
-				switch (value){
-
-					case 0:
-						return 5
-						break
-
-					case -1:
-						return 2
-						break
-
-					case -2:
-						return 0.5
-						break
-					
-					default:
-						return value * 10
-						break
-
-				}
-			}
-
-			else {
-
-				switch (value){
-
-					case 5:
-						return 0
-						break
-
-					case 2:
-						return -1
-						break
-
-					case 0.5:
-						return -2
-						break
-
-					default:
-						return value / 10
-						break
-					
-				}
-			}		
-		}
-
-		// KEYBIND SETTINGS
-		let keybindDisplays = [
-			document.getElementById("rotateCwDisplay"),
-			document.getElementById("rotateCcwDisplay"),
-			document.getElementById("moveRightDisplay"),
-			document.getElementById("moveLeftDisplay"),
-			document.getElementById("moveDownDisplay"),
-			document.getElementById("hardDropDisplay"),
-			document.getElementById("holdDisplay")
-		]
-
-		let keybindButtons = [
-			document.getElementById("rotateCwButton"),
-			document.getElementById("rotateCcwButton"),
-			document.getElementById("moveRightButton"),
-			document.getElementById("moveLeftButton"),
-			document.getElementById("moveDownButton"),
-			document.getElementById("hardDropButton"),
-			document.getElementById("holdButton")
-		]
-
-		for (i in keybindDisplays){
-			keybindDisplays[i].innerHTML = settings.keybinds[i].trigger
-		}
-
-		let currentKeybind = null
-
-		// Function that gets called when any of the buttons are pressed
-		function changeKeybind(keybind){
-			
-			if (currentKeybind == null){
-				currentKeybind = keybind
-				keybindDisplays[keybind].innerHTML = "Waiting for input..."
-				keybindButtons[keybind].innerHTML = "Cancel"
-			}
-
-			else if (currentKeybind == keybind){
-				currentKeybind = null
-				keybindDisplays[keybind].innerHTML = settings.keybinds[keybind].trigger
-				keybindButtons[keybind].innerHTML = "Change input"
-			}
-
-			else {
-
-				for (i in keybindDisplays){
-					keybindDisplays[i].innerHTML = settings.keybinds[i].trigger
-					keybindButtons[i].innerHTML = "Change input"
-				}
-
-				currentKeybind = keybind
-				keybindDisplays[keybind].innerHTML = "Waiting for input..."
-				keybindButtons[keybind].innerHTML = "Cancel"
-			}
-		}
-
-		// Checks if a duplicate key is trying to be assigned, if so, set the first keybind that had the duplicate key to be unbound
-		function checkForDuplicate(key){
-
-			for (let i = 0; i < 7; i++){
-				
-				if (settings.keybinds[i].trigger == key.code){
-
-					settings.keybinds[i].trigger = ""
-					return
-
-				}
-			}
-		}
-
-		// Handles keypresses
-		function actOnKeypress(key){
-
-			if (currentKeybind != null){
-
-				if (key.code != "Escape"){
-
-					checkForDuplicate(key)
-					settings.keybinds[currentKeybind].trigger = key.code
-
-				}
-
-				for (i in keybindDisplays){
-					keybindDisplays[i].innerHTML = settings.keybinds[i].trigger
-					keybindButtons[i].innerHTML = "Change input"
-				}
-
-				currentKeybind = null
-
-			}
-
-		}
-
-		// COSMETICS SETTINGS
-		let skinDropdown = document.getElementById("skinDropdown")
-		let backgroundDropdown = document.getElementById("backgroundDropdown")
-		skinDropdown.value = settings.cosmetics.skin
-		backgroundDropdown.value = settings.cosmetics.background
-
-		let backgroundPreview = document.getElementById("bgPreview")
-		backgroundPreview.setAttribute("src", "../assets/background" + settings.cosmetics.background + "/background.png")
-		const skinPreview = document.getElementById("skinPreview")
-		const ctx = skinPreview.getContext("2d")
-		skinPreview.width = 200
-		skinPreview.height = 200
-		const SKIN_IMAGE = new Image()
-		SKIN_IMAGE.src = "../assets/skin" + settings.cosmetics.skin + "/queue.png"
-
-		skinDropdown.oninput = function (){
-			settings.cosmetics.skin = this.value
-			SKIN_IMAGE.src = "../assets/skin" + settings.cosmetics.skin + "/queue.png"
-		}
-
-		backgroundDropdown.oninput = function (){
-			settings.cosmetics.background = this.value
-			backgroundPreview.setAttribute("src", "../assets/background" + this.value + "/background.png")
-		}
-
-		let animTimer = 1
-		let displayedPiece = 0
-
-		function drawPreview(){
-
-			if (animTimer % 150 == 0){
-				displayedPiece ++
-			}
-
-			ctx.clearRect(0, 0, skinPreview.width, skinPreview.height)
-
-			ctx.drawImage(
-				SKIN_IMAGE,
-				0,
-				(displayedPiece % 7) * -200
-			)
-
-			animTimer ++
-			
-		}
-
-		const animation = setInterval(drawPreview, 10)
-
-		// BUTTONS
-		function exitButton(){
-			if (JSON.stringify(settings) != localStorage.getItem("Settings")){
-				const saveChanges = confirm("Save changes?")
-				if (saveChanges){
-					localStorage.setItem("Settings", JSON.stringify(settings))
-				}
-			}
-
-			window.location.href = "../"
-
-		}
-
-		function resetButton(){
-			const resetDecision = confirm("Are you sure you want to reset all settings to their default values?")
-			if (resetDecision){
-
-				localStorage.setItem("Settings", JSON.stringify(defaultSettings))
-				location.reload()
-
-			}
-		}
-
-	</script>
-	
+  <script src="../checkLocalStorage.js"></script>
+  
+  <!--Start of settings-->
+  <div class="settings-wrapper">
+
+    <!--Start of fixed container-->
+    <div class="fixed-container">
+      <button type="button" class="button" id="exitButton" onclick="exitButton()" style="font-size: 35px; width: 100%;">Go back</button>
+      <button type="button" class="button" id="resetButton" onclick="resetButton()" style="font-size: 35px; width: 100%;">Reset to defaults</button>
+    </div>
+    <!--End of fixed container-->
+
+    <!--Start of Sensitivity-->
+    <div class="container" style="margin-bottom: 20px;">
+      <h1 class="title">Sensitivity</h1>
+
+      <div class="container" style="margin-bottom: 20px;">
+        <text class="tooltip">DAS:<span class="tooltiptext">Delayed Auto-shift. The time it takes for repeats of an input to be triggered when the key is held down. Affects left and right movement.</span></text> <span id="DAS_OUTPUT"></span>ms
+        <br>
+        <input type="range" min="10" max="50" class="slider" id="DAS">
+      </div>
+
+      <div class="container" style="margin-bottom: 20px;">
+        <text class="tooltip">ARR:<span class="tooltiptext">Automatic Repeat Rate. The time inbetween repeats of an input when the key is held down. Affects left and right movement.</span></text> <span id="ARR_OUTPUT"></span>ms
+        <br>
+        <input type="range" min="-2" max="10" class="slider" id="ARR">
+      </div>
+
+      <div class="container" style="margin-bottom: 20px;">
+        <text class="tooltip">SD DAS:<span class="tooltiptext">Soft-drop DAS. The time it takes for repeats of an input to be triggered when the key is held down. Affects downwards movement.</span></text> <span id="SD_DAS_OUTPUT"></span>ms
+        <br>
+        <input type="range" min="0" max="50" class="slider" id="SD_DAS">
+      </div>
+
+      <div class="container">
+        <text class="tooltip">SDR:<span class="tooltiptext">Soft-drop Rate. The time inbetween repeats of an input when the key is held down. Affects downwards movement.</span></text> <span id="SDR_OUTPUT"></span>ms
+        <br>
+        <input type="range" min="-2" max="10" class="slider" id="SDR">
+      </div>
+
+    </div>
+    <!--End of sensitivity-->
+
+    <!--Start of Keybinds-->
+    <div class="container" style="margin-left: -1px; margin-bottom: 20px;">
+      <h1 class="title">Keybinds</h1>
+      <div class="container">
+        <div class="float-child">Rotate clockwise</div>
+        <div class="float-child"><span id="rotateCwDisplay"></span></div>
+        <button type="button" class="float-button" id="rotateCwButton" onclick="changeKeybind(0)">Change input</button>
+      </div>
+      <div class="container">
+        <div class="float-child">Rotate counter-clockwise</div>
+        <div class="float-child"><span id="rotateCcwDisplay"></span></div>
+        <button type="button" class="float-button" id="rotateCcwButton" onclick="changeKeybind(1)">Change input</button>
+      </div>
+      <div class="container">
+        <div class="float-child">Move right</div>
+        <div class="float-child"><span id="moveRightDisplay"></span></div>
+        <button type="button" class="float-button" id="moveRightButton" onclick="changeKeybind(2)">Change input</button>
+      </div>
+      <div class="container">
+        <div class="float-child">Move left</div>
+        <div class="float-child"><span id="moveLeftDisplay"></span></div>
+        <button type="button" class="float-button" id="moveLeftButton" onclick="changeKeybind(3)">Change input</button>
+      </div>
+      <div class="container">
+        <div class="float-child">Move down</div>
+        <div class="float-child"><span id="moveDownDisplay"></span></div>
+        <button type="button" class="float-button" id="moveDownButton" onclick="changeKeybind(4)">Change input</button>
+      </div>
+      <div class="container">
+        <div class="float-child">Hard drop</div>
+        <div class="float-child"><span id="hardDropDisplay"></span></div>
+        <button type="button" class="float-button" id="hardDropButton" onclick="changeKeybind(5)">Change input</button>
+      </div>
+      <div class="container">
+        <div class="float-child">Hold</div>
+        <div class="float-child"><span id="holdDisplay"></span></div>
+        <button type="button" class="float-button" id="holdButton" onclick="changeKeybind(6)">Change input</button>
+      </div>
+    </div>
+    <!--End of Keybinds-->
+
+    <!--Start of Cosmetics-->
+    <div class="container" style="margin-bottom: 20px;">
+      <h1 class="title">Cosmetics</h1>
+
+      <div class="container" style="margin-bottom: 20px;">
+        Select skin:
+        <br>
+        <select class="dropdown" id="skinDropdown">
+          <option value="1">Default</option>
+          <option value="2">Beveled</option>
+          <option value="3">Halftone</option>
+          <option value="4">Stripes</option>
+          <option value="5">Whiteout</option>
+        </select>
+
+        <br>
+        <canvas id="skinPreview"></canvas>
+        
+      </div>
+
+      <div class="container">
+        Select background:
+        <br>
+        <select class="dropdown" id="backgroundDropdown">
+          <option value="1">Default</option>
+          <option value="2">Night Sky</option>
+          <option value="3">Cosmos</option>
+          <option value="4">Gradient</option>
+          <option value="5">Light Beams</option>
+        </select>
+
+        <br>
+        <img id="bgPreview">
+
+      </div>
+    </div>
+    <!--End of Cosmetics-->
+  </div>
+  <!--End of settings-->
+
+  <script>
+    // Unselect all buttons on key presses (fix for keybind related stuff)
+    window.addEventListener("keydown", (event) => {
+    rotateCwButton.blur();
+    rotateCcwButton.blur();
+    moveRightButton.blur();
+    moveLeftButton.blur();
+    moveDownButton.blur();
+    hardDropButton.blur();
+    holdButton.blur();
+    actOnKeypress(event);
+  });
+
+  settings = JSON.parse(localStorage.getItem("Settings"));
+
+  // SENSITIVITY SETTINGS
+  let DAS_SLIDER = document.getElementById("DAS");
+  let DAS_OUTPUT = document.getElementById("DAS_OUTPUT");
+  DAS_SLIDER.value = JSON.parse(localStorage.getItem("Settings")).sensitivity.DAS;
+  DAS_OUTPUT.innerHTML =
+    JSON.parse(localStorage.getItem("Settings")).sensitivity.DAS * 10;
+
+  let ARR_SLIDER = document.getElementById("ARR");
+  let ARR_OUTPUT = document.getElementById("ARR_OUTPUT");
+  ARR_SLIDER.value = convertRateToSetting(
+    Number(JSON.parse(localStorage.getItem("Settings")).sensitivity.ARR),
+    false,
+  );
+  ARR_OUTPUT.innerHTML = JSON.parse(
+    localStorage.getItem("Settings"),
+  ).sensitivity.ARR;
+
+  let SD_DAS_SLIDER = document.getElementById("SD_DAS");
+  let SD_DAS_OUTPUT = document.getElementById("SD_DAS_OUTPUT");
+  SD_DAS_SLIDER.value = JSON.parse(
+    localStorage.getItem("Settings"),
+  ).sensitivity.SD_DAS;
+  SD_DAS_OUTPUT.innerHTML =
+    JSON.parse(localStorage.getItem("Settings")).sensitivity.SD_DAS * 10;
+
+  let SDR_SLIDER = document.getElementById("SDR");
+  let SDR_OUTPUT = document.getElementById("SDR_OUTPUT");
+  SDR_SLIDER.value = convertRateToSetting(
+    Number(JSON.parse(localStorage.getItem("Settings")).sensitivity.SDR),
+    false,
+  );
+  SDR_OUTPUT.innerHTML = JSON.parse(
+    localStorage.getItem("Settings"),
+  ).sensitivity.SDR;
+
+  DAS_SLIDER.oninput = function () {
+    settings.sensitivity.DAS = Number(this.value);
+    DAS_OUTPUT.innerHTML = Number(this.value) * 10;
+  };
+
+  ARR_SLIDER.oninput = function () {
+    settings.sensitivity.ARR = ARR_OUTPUT.innerHTML = convertRateToSetting(
+      Number(this.value),
+      true,
+    );
+  };
+
+  SD_DAS_SLIDER.oninput = function () {
+    settings.sensitivity.SD_DAS = Number(this.value);
+    SD_DAS_OUTPUT.innerHTML = Number(this.value) * 10;
+  };
+
+  SDR_SLIDER.oninput = function () {
+    settings.sensitivity.SDR = SDR_OUTPUT.innerHTML = convertRateToSetting(
+      Number(this.value),
+      true,
+    );
+  };
+
+  // Function to convert slider values to setting values and vice versa
+  function convertRateToSetting(value, fromSlider) {
+    if (fromSlider) {
+      switch (value) {
+        case 0:
+          return 5;
+          break;
+
+        case -1:
+          return 2;
+          break;
+
+        case -2:
+          return 0.5;
+          break;
+
+        default:
+          return value * 10;
+          break;
+      }
+    } else {
+      switch (value) {
+        case 5:
+          return 0;
+          break;
+
+        case 2:
+          return -1;
+          break;
+
+        case 0.5:
+          return -2;
+          break;
+
+        default:
+          return value / 10;
+          break;
+      }
+    }
+  }
+
+  // KEYBIND SETTINGS
+  let keybindDisplays = [
+    document.getElementById("rotateCwDisplay"),
+    document.getElementById("rotateCcwDisplay"),
+    document.getElementById("moveRightDisplay"),
+    document.getElementById("moveLeftDisplay"),
+    document.getElementById("moveDownDisplay"),
+    document.getElementById("hardDropDisplay"),
+    document.getElementById("holdDisplay"),
+  ];
+
+  let keybindButtons = [
+    document.getElementById("rotateCwButton"),
+    document.getElementById("rotateCcwButton"),
+    document.getElementById("moveRightButton"),
+    document.getElementById("moveLeftButton"),
+    document.getElementById("moveDownButton"),
+    document.getElementById("hardDropButton"),
+    document.getElementById("holdButton"),
+  ];
+
+  for (i in keybindDisplays) {
+    keybindDisplays[i].innerHTML = settings.keybinds[i].trigger;
+  }
+
+  let currentKeybind = null;
+
+  // Function that gets called when any of the buttons are pressed
+  function changeKeybind(keybind) {
+    if (currentKeybind == null) {
+      currentKeybind = keybind;
+      keybindDisplays[keybind].innerHTML = "Waiting for input...";
+      keybindButtons[keybind].innerHTML = "Cancel";
+    } else if (currentKeybind == keybind) {
+      currentKeybind = null;
+      keybindDisplays[keybind].innerHTML = settings.keybinds[keybind].trigger;
+      keybindButtons[keybind].innerHTML = "Change input";
+    } else {
+      for (i in keybindDisplays) {
+        keybindDisplays[i].innerHTML = settings.keybinds[i].trigger;
+        keybindButtons[i].innerHTML = "Change input";
+      }
+
+      currentKeybind = keybind;
+      keybindDisplays[keybind].innerHTML = "Waiting for input...";
+      keybindButtons[keybind].innerHTML = "Cancel";
+    }
+  }
+
+  // Checks if a duplicate key is trying to be assigned, if so, set the first keybind that had the duplicate key to be unbound
+  function checkForDuplicate(key) {
+    for (let i = 0; i < 7; i++) {
+      if (settings.keybinds[i].trigger == key.code) {
+        settings.keybinds[i].trigger = "";
+        return;
+      }
+    }
+  }
+
+  // Handles keypresses
+  function actOnKeypress(key) {
+    if (currentKeybind != null) {
+      if (key.code != "Escape") {
+        checkForDuplicate(key);
+        settings.keybinds[currentKeybind].trigger = key.code;
+      }
+
+      for (i in keybindDisplays) {
+        keybindDisplays[i].innerHTML = settings.keybinds[i].trigger;
+        keybindButtons[i].innerHTML = "Change input";
+      }
+
+      currentKeybind = null;
+    }
+  }
+
+  // COSMETICS SETTINGS
+  let skinDropdown = document.getElementById("skinDropdown");
+  let backgroundDropdown = document.getElementById("backgroundDropdown");
+  skinDropdown.value = settings.cosmetics.skin;
+  backgroundDropdown.value = settings.cosmetics.background;
+
+  let backgroundPreview = document.getElementById("bgPreview");
+  backgroundPreview.setAttribute(
+    "src",
+    "../assets/background" + settings.cosmetics.background + "/background.png",
+  );
+  const skinPreview = document.getElementById("skinPreview");
+  const ctx = skinPreview.getContext("2d");
+  skinPreview.width = 200;
+  skinPreview.height = 200;
+  const SKIN_IMAGE = new Image();
+  SKIN_IMAGE.src = "../assets/skin" + settings.cosmetics.skin + "/queue.png";
+
+  skinDropdown.oninput = function () {
+    settings.cosmetics.skin = this.value;
+    SKIN_IMAGE.src = "../assets/skin" + settings.cosmetics.skin + "/queue.png";
+  };
+
+  backgroundDropdown.oninput = function () {
+    settings.cosmetics.background = this.value;
+    backgroundPreview.setAttribute(
+      "src",
+      "../assets/background" + this.value + "/background.png",
+    );
+  };
+
+  let animTimer = 1;
+  let displayedPiece = 0;
+
+  // Draw the preview for the current selected skin
+  function drawPreview() {
+    if (animTimer % 150 == 0) {
+      displayedPiece++;
+    }
+
+    ctx.clearRect(0, 0, skinPreview.width, skinPreview.height);
+
+    ctx.drawImage(SKIN_IMAGE, 0, (displayedPiece % 7) * -200);
+
+    animTimer++;
+  }
+
+  const animation = setInterval(drawPreview, 10);
+
+  // BUTTONS
+  function exitButton() {
+    if (JSON.stringify(settings) != localStorage.getItem("Settings")) {
+      const saveChanges = confirm("Save changes?");
+      if (saveChanges) {
+        localStorage.setItem("Settings", JSON.stringify(settings));
+      }
+    }
+
+    window.location.href = "../";
+  }
+
+  function resetButton() {
+    const resetDecision = confirm(
+      "Are you sure you want to reset all settings to their default values?",
+    );
+    if (resetDecision) {
+      localStorage.setItem("Settings", JSON.stringify(defaultSettings));
+      location.reload();
+    }
+  }
+  </script>
+  
 </body>
 <!--End of Body-->
 </html>
