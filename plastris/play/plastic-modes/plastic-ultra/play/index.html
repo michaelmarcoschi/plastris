@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Plastris - Plastic Ultra</title>
+	<link rel="stylesheet" href="../../../../style.css">
+	<link rel="icon" type="image/x-icon" href="../../../../assets/favicon.png">
+</head>
+<!--Start of Body-->
+<body id="game">
+
+	<script src="../../../../checkLocalStorage.js"></script>
+
+	<button id="pauseButton" class="button active" onclick="gamePaused = true; pauseScreen.classList.add('active'); pauseButton.classList.remove('active')">Esc to pause</button>
+
+	<!--Start of pause screen-->
+	<div id="pauseScreen" class="overlay">
+		<div class="menu-wrapper">
+		
+			<div class="menu-container" style="width: 70%;">
+				<div>
+					<h1 id="modeTitle" class="title" style="margin: auto; width: 100%; text-align: center; padding-top: 3vh;"></h1>
+					<p style="font-size: 45px; text-align: center; margin-top: 2vh;">Try to get as many points as possible!<br>Plastic blocks score extra points!</p>
+				</div>	
+			</div>
+	
+			<div>
+				<button class="button dark-grad" onclick="gamePaused = false; pauseScreen.classList.remove('active'); pauseButton.classList.add('active')">Resume game</button>
+				<button class="button dark-grad" onclick="location.href='../'">Go back</button>
+				<button class="button dark-grad" onclick="location.reload()">Restart</button>
+			</div>
+	
+		</div>
+	</div>
+	<!--End of pause screen-->
+
+	<!--Start of the post-game screen-->
+	<div id="postGameScreen" class="overlay">
+		<div class="menu-wrapper">
+		
+			<div class="menu-container" style="width: 70%;">
+				<div>
+					<h1 id="postGameMessage" class="title" style="margin: auto; width: 100%; text-align: center; padding-top: 3vh;"></h1>
+					<p id="summaryMessage" style="font-size: 25px; text-align: center; margin-top: 2vh;"></p>
+				</div>	
+			</div>
+	
+			<div>
+				<button class="button dark-grad" onclick="location.reload()">Play again</button>
+				<button class="button dark-grad" onclick="location.href='../'">Exit to menu</button>
+			</div>
+	
+		</div>
+	</div>
+	<!--End of the post-game screen-->
+
+	<canvas id="playingField"></canvas>
+
+	<script src="../../../main.js"></script>
+	<script src="../../../pl-main.js"></script>
+	<script>
+
+		let modeParam = JSON.parse(sessionStorage.getItem("Selections")).PL_ULT
+		let modeTitle = document.getElementById("modeTitle")
+		let goalMet = false
+		let plasticSpawnQueue = -1
+
+		switch (modeParam){
+
+			case 0:
+				modeTitle.innerHTML = "Plastic Ultra (3 min)"
+				gameTimer = 18000
+				break
+			
+			case 1:
+				modeTitle.innerHTML = "Plastic Ultra (2 min)"
+				gameTimer = 12000
+				break
+
+			case 2:
+				modeTitle.innerHTML = "Ultra (1 min)"
+				gameTimer = 6000
+				break
+		}
+
+		function drawTextInfo(){
+
+			const TEXT_ORIGIN = [15, 300]
+
+			ctx.font = "40px Ubuntu"
+			ctx.textAlign = "start"
+
+			ctx.fillText("Level", TEXT_ORIGIN[0], TEXT_ORIGIN[1] + 0)
+			ctx.fillText(level, TEXT_ORIGIN[0], TEXT_ORIGIN[1] + 50)		
+			ctx.fillText("Lines", TEXT_ORIGIN[0], TEXT_ORIGIN[1] + 100)
+			ctx.fillText(linesCleared, TEXT_ORIGIN[0], TEXT_ORIGIN[1] + 150)
+			ctx.fillText("Score", TEXT_ORIGIN[0], TEXT_ORIGIN[1] + 200)
+			ctx.fillText(score, TEXT_ORIGIN[0], TEXT_ORIGIN[1] + 250)
+			ctx.fillText("Time left", TEXT_ORIGIN[0], TEXT_ORIGIN[1] + 300)
+			ctx.fillText(String(Math.floor(gameTimer / 6000)) + ":" + (((Math.floor(gameTimer * 0.01) % 60)) < 10 ? "0" : "") + ((Math.floor(gameTimer * 0.01) % 60)) + "." + (String(String(0) + String(gameTimer)).slice(-2)), TEXT_ORIGIN[0], TEXT_ORIGIN[1] + 350)
+		}
+
+		function updateGameState(){
+
+			// If the piece is colliding with ground below
+			if (checkMovementCollision(0, 1)){
+
+				// Lock the piece when the piece lock timer reaches 50
+				if (pieceLockTimer == 50){
+					lockCurrentPiece()
+				}
+
+				else {
+					pieceLockTimer ++
+				}
+			}
+
+			// If it is not colliding with anything below
+			else {
+
+				// Move the piece downwards according to the gravity of the current level
+				if (pieceTimer % LEVEL_DATA[level].gravity == 0 && !moveDownPressed){
+					pieceSpritePositionY ++
+					pieceLockTimer = 0
+				}
+			}
+
+			// Count the timer down until 0
+			if (gameTimer == 0){
+				goalMet = true
+				gameCleared = true
+			}
+
+			// Check if 15 seconds have passed
+			else if (((((Math.floor(gameTimer * 0.01) % 60)) < 10 ? "0" : "") + ((Math.floor(gameTimer * 0.01) % 60))) % 15 == 0 && (String(String(0) + String(gameTimer)).slice(-2)) == 0){
+				plasticSpawnQueue ++
+				gameTimer --
+			}
+			
+			else {
+				gameTimer --
+			}
+
+			// Hard-cap score to 100M
+			if (score >= 99999999){
+				score = 99999999
+			}
+
+			// Update level accordingly
+			if (LEVEL_DATA[level].linesToClear <= linesCleared && level < 15){
+				level ++
+			}
+
+			// Spawn plastic lines accordingly
+			if (plasticSpawnQueue > 0 && combo == -1 && pieceTimer == 1){
+				if (currentPlasticLines < 9){
+					for (let i = 0; i < plasticSpawnQueue; i++){
+						createPlasticLine(4)
+					}
+				}
+				plasticSpawnQueue = 0
+			}
+				
+			pieceTimer++
+
+			drawScreen(true, true)
+	
+			// Create the post-game screen if you lose
+			if (gameCleared){
+
+				// Save everything to records
+				records = JSON.parse(localStorage.getItem("Records"))
+
+				records[4][3].value ++
+
+				records[0][0].value += totalRotations
+				records[0][1].value += totalPieceLocks
+				records[0][2].value += score
+				records[0][3].value ++
+
+				if (score > records[4][modeParam].value){
+					records[4][modeParam].value = score
+				}
+
+				localStorage.setItem("Records", JSON.stringify(records))
+
+				currentPieceImage = GHOST_IMAGE
+				drawScreen(true, false)
+
+				let levelDisplay = ""
+				let linesDisplay = ""
+				let scoreDisplay = ""
+				let timeDisplay = ""
+
+				if (!goalMet){
+					postGameMessage.innerHTML = "You topped out!"
+					timeDisplay = "Time left<br>" + String(Math.floor(gameTimer / 6000)) + ":" + (((Math.floor(gameTimer * 0.01) % 60)) < 10 ? "0" : "") + ((Math.floor(gameTimer * 0.01) % 60)) + "." + (String(String(0) + String(gameTimer)).slice(-2))
+				}
+
+				else {
+					postGameMessage.innerHTML = "You ran out of time!"
+				}
+
+				levelDisplay = "Level<br>" + level + "<br>"
+				linesDisplay = "Lines<br>" + linesCleared + "<br>"
+				scoreDisplay = "Score<br>" + score + "<br>"
+
+				summaryMessage.innerHTML = scoreDisplay + levelDisplay + linesDisplay + timeDisplay
+
+				postGameScreen.classList.add("active")
+				pauseButton.classList.remove("active")
+	
+				// Stop all game code
+				clearInterval(gameInterval)
+	
+			}
+		}
+
+	</script>
+
+</body>
+<!--End of Body-->
+</html>
